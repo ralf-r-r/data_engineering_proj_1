@@ -10,10 +10,10 @@ time_table_drop = "DROP TABLE IF EXISTS time_table"
 
 songplay_table_create = (""" 
 CREATE TABLE IF NOT EXISTS
-songplay (
-    songplay_id varchar,start_time int,user_id varchar,
+songplay_table (
+    songplay_id SERIAL PRIMARY KEY,start_time varchar,user_id varchar,
     level varchar, song_id varchar, artist_id varchar, 
-    session_id int, location varchar, user_agent varchar
+    session_id varchar, location varchar, user_agent varchar
 )
 """)
 
@@ -33,6 +33,7 @@ song_table(
 )
 """)
 
+
 artist_table_create = ("""
 CREATE TABLE IF NOT EXISTS
 artist_table(
@@ -43,31 +44,47 @@ artist_table(
 time_table_create = ("""
 CREATE TABLE IF NOT EXISTS
 time_table(
-    start_time int, hour int, day int, week int, month int, year int, weekday int
+    start_time timestamp, hour int, day int, week int, month int, year int, weekday int
 )
 """)
 
 # INSERT RECORDS
 
 songplay_table_insert = ("""
+INSERT INTO songplay_table(start_time, user_id, level, song_id, 
+artist_id, session_id, location, user_agent) VALUES(%s, %s, %s, %s, %s ,%s, %s ,%s)
 """)
 
 user_table_insert = ("""
+INSERT INTO user_table(user_id, first_name, last_name, 
+gender, level) VALUES(%s, %s, %s, %s ,%s)
 """)
 
 song_table_insert = ("""
+INSERT INTO song_table(song_id, title, artist_id, 
+year, duration) VALUES(%s, %s, %s, %s ,%s)
 """)
 
 artist_table_insert = ("""
+INSERT INTO artist_table(artist_id, name, location, 
+latitude, longitude) VALUES(%s, %s, %s, %s ,%s)
 """)
-
 
 time_table_insert = ("""
+INSERT INTO time_table(start_time, hour, day, week, 
+month, year, weekday) VALUES(%s, %s, %s, %s ,%s, %s, %s)
 """)
+
 
 # FIND SONGS
 
 song_select = ("""
+SELECT  song_table.song_id, artist_table.artist_id
+FROM song_table
+INNER JOIN artist_table ON song_table.artist_id = artist_table.artist_id
+WHERE song_table.title = %s
+AND artist_table.name = %s
+AND song_table.duration = %s
 """)
 
 # QUERY LISTS
