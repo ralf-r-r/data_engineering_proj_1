@@ -5,6 +5,7 @@ The project defines fact and dimension tables for a star schema for a particular
 # Porject Structure
 - **sql_queries.py**: Contains the SQL statements for: create tables, drop tables, insert values
 - **etl.py**: Contains the python code to process an entire directory of json files
+- **create_tables.py**: Cotains the python code to create the tables
 
 # How to run the code
 
