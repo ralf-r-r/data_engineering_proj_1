@@ -37,7 +37,7 @@ artist_id, name, location, latitude, longitude
 start_time, hour, day, week, month, year, weekday
 
 
-# Run the cCde
+# Run the Code
 
 ### Create the Tables
 Run the following command in the terminal
